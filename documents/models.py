@@ -26,9 +26,9 @@ class Document(models.Model):
     )
     category = models.ForeignKey(
         Category,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        on_delete=models.PROTECT,  # ou CASCADE selon ton choix
+        null=False,
+        blank=False,
         related_name="documents"
     )
 
