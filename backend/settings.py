@@ -1,4 +1,5 @@
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -138,3 +139,6 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 # settings.py
 X_FRAME_OPTIONS = 'SAMEORIGIN'  # autorise les iframes sur le même domaine
+ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS", "127.0.0.1")]
+
+DEBUG = os.environ.get("DEBUG", "False") == "True"
