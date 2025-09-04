@@ -139,6 +139,10 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 # settings.py
 X_FRAME_OPTIONS = 'SAMEORIGIN'  # autorise les iframes sur le même domaine
-ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS", "127.0.0.1")]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "dms-backend.onrender.com",   # ton backend Render
+]
 
 DEBUG = os.environ.get("DEBUG", "False") == "True"
