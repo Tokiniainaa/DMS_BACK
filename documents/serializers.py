@@ -27,6 +27,7 @@ class DocumentSerializer(serializers.ModelSerializer):
             "uploaded_at",
             "owner_username",
             "category_name",
+            "owner"           # Important : owner est read_only
         ]
 
 
