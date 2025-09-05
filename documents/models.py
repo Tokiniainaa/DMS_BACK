@@ -15,7 +15,7 @@ class Category(models.Model):
 class Document(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
-    file = models.FileField(upload_to="documents/")
+    file = models.FileField(upload_to="my_documents/")
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     # Relations

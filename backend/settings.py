@@ -140,11 +140,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
-CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
-    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
-}
+
 # settings.py
 X_FRAME_OPTIONS = 'SAMEORIGIN'  # autorise les iframes sur le même domaine
 ALLOWED_HOSTS = [
@@ -158,5 +154,10 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
+}
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
 }
 DEBUG = os.environ.get("DEBUG", "False") == "True"
