@@ -19,7 +19,7 @@ class DocumentViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = {
         "category__name": ["exact"],    # si category est FK
-        "owner__username": ["exact"],   # filtrage par username
+        "owner__username": ["iexact"],   # filtrage par username
         "uploaded_at": ["gte", "lte"],  # filtrage par plage de datesl
     }
     search_fields = ["title"]

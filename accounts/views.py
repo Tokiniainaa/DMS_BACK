@@ -4,6 +4,9 @@ from django.contrib.auth import get_user_model
 from rest_framework.exceptions import PermissionDenied
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from .serializers import UserSerializer
 
@@ -36,3 +39,22 @@ class UserViewSet(ModelViewSet):
             raise PermissionDenied(
                 "Seul un admin peut supprimer un utilisateur.")
         instance.delete()
+
+    @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
+    def me(self, request):
+        serializer = self.get_serializer(request.user)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=["get"], url_path="owners_list")
+    def owners_list(self, request):
+        """Retourne la liste de tous les utilisateurs (accessible uniquement par un admin)"""
+
+        if not request.user.is_superuser and getattr(request.user, "role", None) != "admin":
+            raise PermissionDenied(
+                "Seul un admin peut voir la liste des utilisateurs.")
+
+        # 🔍 Récupérer tous les users (sauf superuser si tu veux)
+        owners = User.objects.filter(is_superuser=False)
+
+        serializer = self.get_serializer(owners, many=True)
+        return Response(serializer.data)
